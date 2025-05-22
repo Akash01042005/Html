@@ -1,0 +1,32 @@
+<label for="prefEventType">Preferred Event Type:</label>
+<select id="prefEventType">
+  <option value="">--Select--</option>
+  <option value="conference">Conference</option>
+  <option value="workshop">Workshop</option>
+  <option value="meetup">Meetup</option>
+</select>
+
+<button id="clearPrefsBtn">Clear Preferences</button>
+
+<script>
+  const prefSelect = document.getElementById('prefEventType');
+  const clearBtn = document.getElementById('clearPrefsBtn');
+
+  window.onload = () => {
+    const savedPref = localStorage.getItem('preferredEventType');
+    if (savedPref) {
+      prefSelect.value = savedPref;
+    }
+  };
+
+  prefSelect.onchange = () => {
+    localStorage.setItem('preferredEventType', prefSelect.value);
+  };
+
+  clearBtn.onclick = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    prefSelect.value = "";
+    alert("Preferences cleared");
+  };
+</script>

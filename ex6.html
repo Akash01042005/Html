@@ -1,0 +1,69 @@
+<form id="feedbackForm">
+  <label for="phone">Phone Number:
+    <input type="tel" id="phone" name="phone" placeholder="123-456-7890">
+  </label>
+
+  <label for="eventSelect">Select Event:
+    <select id="eventSelect" name="eventSelect">
+      <option value="" data-fee="0">--Choose--</option>
+      <option value="conference" data-fee="100">Conference - $100</option>
+      <option value="workshop" data-fee="50">Workshop - $50</option>
+      <option value="meetup" data-fee="0">Meetup - Free</option>
+    </select>
+  </label>
+
+  <p>Event Fee: $<span id="eventFee">0</span></p>
+
+  <button type="button" id="submitBtn">Submit Feedback</button>
+
+  <br><br>
+
+  <img id="eventImage" src="event1.jpg" alt="Event Image" width="200" style="cursor:pointer;">
+
+  <br><br>
+
+  <label for="feedback">Feedback:
+    <textarea id="feedback" rows="4" cols="50" placeholder="Type your feedback..."></textarea>
+  </label>
+
+  <p>Characters typed: <span id="charCount">0</span></p>
+</form>
+
+<script>
+  const phoneInput = document.getElementById('phone');
+  const eventSelect = document.getElementById('eventSelect');
+  const eventFee = document.getElementById('eventFee');
+  const submitBtn = document.getElementById('submitBtn');
+  const eventImage = document.getElementById('eventImage');
+  const feedback = document.getElementById('feedback');
+  const charCount = document.getElementById('charCount');
+
+  phoneInput.onblur = function() {
+    const phonePattern = /^\\d{3}-\\d{3}-\\d{4}$/;
+    if (!phonePattern.test(phoneInput.value)) {
+      alert('Please enter a valid phone number (e.g., 123-456-7890)');
+      phoneInput.focus();
+    }
+  };
+
+  eventSelect.onchange = function() {
+    const selectedOption = eventSelect.options[eventSelect.selectedIndex];
+    eventFee.textContent = selectedOption.getAttribute('data-fee') || "0";
+  };
+
+  submitBtn.onclick = function() {
+    alert('Thank you for your feedback!');
+  };
+
+  eventImage.ondblclick = function() {
+    if (eventImage.style.width === "400px") {
+      eventImage.style.width = "200px";
+    } else {
+      eventImage.style.width = "400px";
+    }
+  };
+
+  feedback.oninput = function() {
+    charCount.textContent = feedback.value.length;
+  };
+</script>

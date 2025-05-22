@@ -1,0 +1,62 @@
+<style>
+  form {
+    max-width: 400px;
+    margin: 20px 0;
+  }
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+  }
+  output {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+</style>
+
+<form id="registrationForm">
+  <label for="name">Name:
+    <input type="text" id="name" name="name" placeholder="Your full name" required autofocus>
+  </label>
+
+  <label for="email">Email:
+    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+  </label>
+
+  <label for="date">Date:
+    <input type="date" id="date" name="date" required>
+  </label>
+
+  <label for="eventType">Event Type:
+    <select id="eventType" name="eventType" required>
+      <option value="">--Select--</option>
+      <option value="conference">Conference</option>
+      <option value="workshop">Workshop</option>
+      <option value="meetup">Meetup</option>
+    </select>
+  </label>
+
+  <label for="message">Message:
+    <textarea id="message" name="message" rows="4" placeholder="Any special requests"></textarea>
+  </label>
+
+  <button type="submit">Register</button>
+
+  <output id="confirmation"></output>
+</form>
+
+<script>
+  const form = document.getElementById('registrationForm');
+  const confirmation = document.getElementById('confirmation');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    confirmation.textContent = `Thank you, ${form.name.value}, for registering for the ${form.eventType.value} event on ${form.date.value}.`;
+    form.reset();
+  });
+</script>
